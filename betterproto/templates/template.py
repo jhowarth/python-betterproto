@@ -62,16 +62,15 @@ class {{ service.py_name }}Stub(object):
     {% endif %}
     def __init__(self, channel):
         {% for method in service.methods %}
-            # TODO: streaming
+            {% if method.comment %}
+{{ method.comment }}
+
+            {% endif %}
         self.{{ method.py_name }} = channel.unary_unary(
             "{{ method.route }}",
             request_serializer=bytes,
             response_deserializer={{ method.output }}().parse,
         )
-    #        {% if method.comment %}
-    #{{ method.comment }}
-
-    #        {% endif %}
 
 
         {% endfor %}

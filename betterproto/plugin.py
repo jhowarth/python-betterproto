@@ -364,13 +364,13 @@ def generate_code(request, response):
                     input_type = get_ref_type(
                         package, output["imports"], method.input_type
                     ).strip('"')
-                    for msg in output["messages"]:
-                        if msg["name"] == input_type:
-                            input_message = msg
-                            for field in msg["properties"]:
-                                if field["zero"] == "None":
-                                    output["typing_imports"].add("Optional")
-                            break
+                    #for msg in output["messages"]:
+                    #    if msg["name"] == input_type:
+                    #        input_message = msg
+                    #        for field in msg["properties"]:
+                    #            if field["zero"] == "None":
+                    #                output["typing_imports"].add("Optional")
+                    #        break
 
                     data["methods"].append(
                         {
@@ -390,8 +390,8 @@ def generate_code(request, response):
                         }
                     )
 
-                    if method.server_streaming:
-                        output["typing_imports"].add("AsyncGenerator")
+                    #if method.server_streaming:
+                    #    output["typing_imports"].add("AsyncGenerator")
 
                 output["services"].append(data)
 
