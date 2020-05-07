@@ -74,7 +74,7 @@ class {{ service.py_name }}Stub(object):
             {% endif %}
             "{{ method.route }}",
             request_serializer=bytes,
-            response_deserializer={{ method.output }}().parse,
+            response_deserializer=lambda response: {{ method.output }}().parse(response),
         )
 
 
