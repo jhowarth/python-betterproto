@@ -66,7 +66,12 @@ class {{ service.py_name }}Stub(object):
 {{ method.comment }}
 
             {% endif %}
+
+            {% if method.server_streaming %}
+        self.{{ method.py_name }} = channel.unary_stream(
+            {% else %}
         self.{{ method.py_name }} = channel.unary_unary(
+            {% endif %}
             "{{ method.route }}",
             request_serializer=bytes,
             response_deserializer={{ method.output }}().parse,
